@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+<form class="form-inline my-2 my-lg-0" method="post" action="{% url 'view_available_trains'%}" role="form">
+{% csrf_token %}
+    <div class="form-group">
+    <input class="form-control mr-sm-2" placeholder="Source" name="source" type="text">
+    <input class="form-control mr-sm-2" placeholder="Destination" name="destination" type="text">
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="margin-right:10px;">View All Available trains</button>
+    </div>
+</form>
+    {% if error_message_train %}
+        <p><strong>{{ error_message_train }}</strong></p>
+    {% endif %}
+    {% if trains %}
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">train No.</th>
+      <th scope="col">Train</th>
+      <th scope="col">No. of seats</th>
+      <th scope="col">Source</th>
+      <th scope="col">Destination</th>
+      <th scope="col">Departure Time</th>
+      <th scope="col">Arrival Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for train in trains %}
+        <tr>
+          <td>{{train.train_no}}</td>
+          <td>{{train.train_name}}</td>
+          <td>{{ train.no_of_seats }}</td>
+          <td>{{ train.source}}</td>
+          <td>{{ train.destination}}</td>
+          <td>{{ train.departure_time}}</td>
+          <td>{{ train.arrival_time}}</td>
+          <td>
+            {% if train.no_of_seats > 0 %}
+                <a href="{% url 'book_train' train.pk%}" class="btn btn-outline-success" role="button">Book Now!</a>
+            {% else %}
+                <button type="button" class="btn btn-success disabled">Book Now!</button>
+            {% endif %}
+          </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endif %}
+<br>
+<form class="form-inline my-2 my-lg-0" method="post" action="{% url 'view_booking' %}" role="form">
+  {% csrf_token %}
+  <input class="form-control mr-sm-2" placeholder="Enter PNR" name="pnr" type="text">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="margin-right:10px;">View My Booking</button>
+    {% if error_message_booking %}<p><strong>{{ error_message_booking }}</strong></p>{% endif %}
+</form>
+{% endblock %}
