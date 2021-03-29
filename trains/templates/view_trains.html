@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}View trains{% endblock %}
+{% block body %}
+
+<h3>trains</h3>
+<div>
+<form class="form-inline my-2 my-lg-0" method="post" action="{% url 'search_by_source'%}" role="form">
+  {% csrf_token %}
+  <input class="form-control mr-sm-2" placeholder="Search by Source" name="source" type="text">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="margin-right:10px;">Search</button>
+</form>
+<br>
+<form class="form-inline my-2 my-lg-0" method="post" action="{% url 'search_by_destination'%}" role="form">
+  {% csrf_token %}
+  <input class="form-control mr-sm-2" placeholder="Search by Destination" name="destination" type="text">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form>
+</div>
+
+<br>
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Train No.</th>
+      <th scope="col">Train Name</th>
+      <th scope="col">No. of seats</th>
+      <th scope="col">Source</th>
+      <th scope="col">Destination</th>
+      <th scope="col">Departure Time</th>
+      <th scope="col">Arrival Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for train in trains %}
+        <tr>
+          <td>{{ train.train_no}}</td>
+          <td>{{ train.train_name}}</td>
+          <td>{{ train.no_of_seats }}</td>
+          <td>({{ train.source_code}}) {{ train.source}}</td>
+          <td>({{ train.destination_code}}) {{ train.destination}}</td>
+          <td>{{ train.departure_time}}</td>
+          <td>{{ train.arrival_time}}</td>
+          <td>
+            {% if train.no_of_seats > 0 %}
+                <a href="{% url 'book_train' train.pk%}" class="btn btn-outline-success" role="button">Book Now!</a>
+            {% else %}
+                <button type="button" class="btn btn-success disabled">Book Now!</button>	    
+            {% endif %}
+          </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table> 
+
+{% endblock %}
