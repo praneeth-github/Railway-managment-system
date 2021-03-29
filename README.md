@@ -1,15 +1,15 @@
 # Railway Management System 
 
 ### Setting up MySQL 
-```bash
+```
 create database railwaydb character set utf8;
 create user stationuser@localhost identified by 'Password@0';
 grant all privileges on railwaydb.* to stationuser@localhost;
 flush privileges;
 ```
 
-### Setting up Virtual Environment and Install Requirements
-```bash
+### Setting up Virtual Environment
+```
 py -m venv new
 new\Scripts\activate.ps1
 ```
