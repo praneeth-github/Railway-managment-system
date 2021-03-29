@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class TrainsConfig(AppConfig):
+class trainsConfig(AppConfig):
     name = 'trains'

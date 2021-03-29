@@ -1,5 +1,5 @@
 """
-WSGI config for station project.
+WSGI config for airport project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
