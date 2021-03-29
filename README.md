@@ -3,8 +3,8 @@
 ### Setting up MySQL 
 ```
 create database railwaydb character set utf8;
-create user stationuser@localhost identified by 'Password@0';
-grant all privileges on railwaydb.* to stationuser@localhost;
+create user stationuser1@localhost identified by 'Password@0';
+grant all privileges on railwaydb.* to stationuser1@localhost;
 flush privileges;
 ```
 
