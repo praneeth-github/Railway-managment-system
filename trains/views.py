@@ -164,14 +164,6 @@ def view_booking(request):
             return render(request, 'home.html', {'error_message_booking': 'No booking found'})
 
 
-def create_pdf(request, pk):
-    passenger = get_object_or_404(Passenger, pk=pk)
-    html = loader.render_to_string('passenger_home.html', {'passenger': passenger})
-    output = pdfkit.from_string(html, output_path=False)
-    response = HttpResponse(content_type="application/pdf")
-    response.write(output)
-    return response
-
 
 def staff_check_in(request, pk):
     passenger = get_object_or_404(Passenger, pk=pk)
@@ -186,11 +178,3 @@ def delete_passengers(request, train_no):
     passenger.delete()
     return redirect('staff_home', train_no=train.train_no)
 
-
-def generate_report(request, train_no):
-    passengers = Passenger.objects.filter(train_no=train_no)
-    html = loader.render_to_string('staff_home.html', {'passengers': passengers, 'train_no': train_no})
-    output = pdfkit.from_string(html, output_path=False)
-    response = HttpResponse(content_type="application/pdf")
-    response.write(output)
-    return response
