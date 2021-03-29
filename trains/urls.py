@@ -19,9 +19,7 @@ urlpatterns = [
     path('view_available_trains/', views.view_available_trains, name='view_available_trains'),
     path('book_train/<int:pk>', views.book_train, name='book_train'),
     path('passenger_home/<int:pk>', views.passenger_home, name='passenger_home'),
-    path('create_pdf/<int:pk>', views.create_pdf, name='create_pdf'),
     path('staff_check_in/<int:pk>', views.staff_check_in, name='staff_check_in'),
-    path('generate_report/<int:train_no>', views.generate_report, name='generate_report'),
     path('delete_passenger/<int:train_no>', views.delete_passengers, name='delete_passengers'),
     path('view_booking', views.view_booking, name='view_booking')
 
