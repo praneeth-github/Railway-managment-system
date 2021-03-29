@@ -15,7 +15,7 @@ new\Scripts\activate.ps1
 ```
 
 ### Running the project
-
+```
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
